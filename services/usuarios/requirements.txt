@@ -1,0 +1,4 @@
+flask
+PyJWT
+bcrypt
+python-dotenv
