@@ -23,7 +23,7 @@ def init_database():
 
 @app.route('/register', methods=['POST']) # (Decorador de Flask) Indico a Flask que se ejecute la funcion cuando se intente hacer un registro
 def register():
-    data = request.get_json()                                                    # Extraigo los datos del body
+    data = request.get_json(force=True)                                                    # Extraigo los datos del body
     if data == None:                                                             # Si el body esta vacio devuelve error
         return jsonify('campos de registro vacios'), 400
     if 'nombre' not in data or 'email' not in data or 'password' not in data:    # Si uno de los datos para el registro no fue proporcionado devuelve error
@@ -45,7 +45,7 @@ def register():
 
 @app.route('/login', methods=['POST'])                   # Decorador de Flask para la funcion de login
 def login():
-    data = request.get_json()                            # Obtencion de datos
+    data = request.get_json(force=True)                            # Obtencion de datos
     if data == None:
         return jsonify('Body vacio'), 400
     if 'email' not in data or 'password' not in data:    # Si no se ingresaron email o password devuelve error
@@ -81,4 +81,4 @@ def validate():
 
 if __name__ == '__main__':
     init_database()
-    app.run(port=8001)
+    app.run(host='0.0.0.0', port=8001)
